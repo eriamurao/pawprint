@@ -26,4 +26,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_08_055428) do
     t.datetime "updated_at", null: false
     t.index ["created_from_id"], name: "index_tasks_on_created_from_id"
   end
+
+  add_foreign_key "tasks", "tasks", column: "created_from_id"
 end

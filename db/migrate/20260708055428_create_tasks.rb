@@ -7,10 +7,8 @@ class CreateTasks < ActiveRecord::Migration[8.1]
       t.integer :log_day, null: true
       t.integer :status, null: false, default: 0
       t.boolean :priority, null: false, default: false
-      t.bigint :created_from_id, null: true
+      t.references :created_from, null: true, foreign_key: { to_table: :tasks }
       t.timestamps
     end
-
-    add_index :tasks, :created_from_id
   end
 end

@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  belongs_to :created_from, class_name: "Task", optional: true
+  belongs_to :created_from, class_name: 'Task', optional: true
 
   validates :content, presence: true
   validates :status, presence: true
