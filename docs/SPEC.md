@@ -50,6 +50,18 @@ moves, distinguished by whether the new row has a `log_day`:
 So `status` on a task tells you what happened to *that row*, and `created_from_id` on its successor
 tells you where it went.
 
+## Testing
+
+RSpec, not Minitest, is the test framework. `config/application.rb` sets
+`config.generators { |g| g.test_framework :rspec, fixtures: true }` so generators produce RSpec
+specs under `spec/` instead of Minitest tests under `test/` (the `test/` directory has been
+removed). `bundle exec rspec` runs the suite; `bin/rubocop` covers `spec/**/*` too (see
+`.rubocop.yml`'s `Style/StringLiterals` override).
+
+Test data uses FactoryBot — the plain `factory_bot` gem, not `factory_bot-rails`, so it isn't
+auto-wired: `spec/rails_helper.rb` manually adds `config.include FactoryBot::Syntax::Methods` and
+`config.before(:suite) { FactoryBot.find_definitions }`. Factories live in `spec/factories/`.
+
 ## Planned, not yet built
 
 Noted here so the context isn't lost before we get to them:
@@ -58,5 +70,12 @@ Noted here so the context isn't lost before we get to them:
 - **`Note`** — separate table, not a `tasks` row. Freeform note content, no status/lifecycle.
 - **`Inspiration`** — separate table. No date columns — inspirations aren't scoped to a
   day/month/year like tasks are.
+- **RSpec system specs.** The `system-test` job in `.github/workflows/ci.yml` still runs Minitest's
+  `bin/rails test:system` task. This is a no-op today — a `test/system` directory never existed in
+  this app, and no RSpec `type: :system` specs exist either — so the job currently does nothing
+  functional (just spins up Postgres + Ruby for zero tests). Left as-is intentionally for now. To
+  make it real later: configure a Capybara driver in `spec/rails_helper.rb` and add specs under
+  `spec/system/`; the `capybara`/`selenium-webdriver` gems are already in the Gemfile's `:test`
+  group, just unused so far.
 
 None of these have a finalized schema yet; they'll get their own section here when designed.
