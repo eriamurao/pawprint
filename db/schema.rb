@@ -15,14 +15,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_08_055428) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "tasks", force: :cascade do |t|
-    t.text "content", null: false
     t.datetime "created_at", null: false
     t.bigint "created_from_id"
+    t.text "description"
     t.integer "log_day"
     t.integer "log_month", null: false
     t.integer "log_year", null: false
     t.boolean "priority", default: false, null: false
     t.integer "status", default: 0, null: false
+    t.string "title", null: false
     t.datetime "updated_at", null: false
     t.index ["created_from_id"], name: "index_tasks_on_created_from_id"
   end
