@@ -10,8 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 0) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_08_055428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "tasks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "created_from_id"
+    t.text "description"
+    t.integer "log_day"
+    t.integer "log_month", null: false
+    t.integer "log_year", null: false
+    t.boolean "priority", default: false, null: false
+    t.integer "status", default: 0, null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_from_id"], name: "index_tasks_on_created_from_id"
+  end
+
+  add_foreign_key "tasks", "tasks", column: "created_from_id"
 end
