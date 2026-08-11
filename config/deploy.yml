@@ -58,6 +58,9 @@ env:
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
 
+    # Origin allowed for browser requests from the React UI (required in production).
+    PAWPRINT_UI_URL: https://your-ui-domain.example
+
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
 aliases:

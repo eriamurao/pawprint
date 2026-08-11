@@ -27,8 +27,9 @@ expected later, so avoid designs that would be painful to retrofit an owner scop
 ## General coding guidelines
 
 - Prioritize code correctness and clarity; speed and efficiency are secondary unless a task specifically calls for it.
-- Use full words for variable and method names — avoid abbreviations.
+- Use descriptive full words for variable and method names — avoid abbreviations.
 - Prefer simple, single-responsibility methods.
+- Prefer standard loops rather than complex higher-order functions when logic is heavy.
 - Make sure to document any errors that are raised or returned.
 - Log every caught error with enough context to diagnose it — never fail silently.
 - Add specs (RSpec) for all new code.
